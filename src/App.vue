@@ -1,6 +1,72 @@
+
+<template>
+  <div class="aplicacao">
+    <header class="cabecalho">
+      <RouterLink to="/" class="marca">
+        <span class="marca-simbolo">E</span>
+        <span>Elas <strong>Protegidas</strong></span>
+      </RouterLink>
+
+      <button
+        class="menu-botao"
+        type="button"
+        @click="menuAberto = !menuAberto"
+        :aria-expanded="menuAberto"
+        aria-label="Abrir ou fechar menu"
+      >
+        {{ menuAberto ? 'Fechar' : 'Menu' }}
+      </button>
+
+      <nav class="navegacao" :class="{ aberto: menuAberto }">
+        <RouterLink to="/" @click="fecharMenu">Início</RouterLink>
+        <RouterLink to="/direitos" @click="fecharMenu">
+          Direitos
+        </RouterLink>
+        <RouterLink to="/relacionamentos" @click="fecharMenu">
+          Relacionamentos
+        </RouterLink>
+        <RouterLink to="/ajuda" @click="fecharMenu">
+          Ajuda
+        </RouterLink>
+        <RouterLink to="/quiz" @click="fecharMenu">
+          Quiz
+        </RouterLink>
+        <RouterLink
+          to="/solicitar-ajuda"
+          class="link-solicitar"
+          @click="fecharMenu"
+        >
+          Solicitar ajuda
+        </RouterLink>
+      </nav>
+    </header>
+
+    <RouterView />
+
+    <footer class="rodape">
+      <RouterLink to="/" class="rodape-marca">
+        Elas Protegidas
+      </RouterLink>
+
+      <p>Informação é proteção. Conhecimento é poder.</p>
+
+      <p class="rodape-aviso">
+        Projeto educativo. Não substitui serviços oficiais de atendimento.
+      </p>
+
+      <div class="rodape-links">
+        <RouterLink to="/direitos">Direitos</RouterLink>
+        <RouterLink to="/ajuda">Canais de ajuda</RouterLink>
+        <RouterLink to="/solicitar-ajuda">Solicitar ajuda</RouterLink>
+      </div>
+
+      <small>© 2026 Elas Protegidas. Projeto educativo.</small>
+    </footer>
+  </div>
+</template>
+
 <script setup>
 import { ref } from 'vue'
-import { RouterLink, RouterView } from 'vue-router'
 
 const menuAberto = ref(false)
 
@@ -9,69 +75,157 @@ function fecharMenu() {
 }
 </script>
 
-<template>
-  <div class="site">
-    <header class="cabecalho">
-      <RouterLink to="/" class="marca" @click="fecharMenu">
-        <span class="marca-icone">♡</span>
+<style>
+* {
+  box-sizing: border-box;
+}
 
-        <span class="marca-texto">
-          <strong>Elas Protegidas</strong>
-          <small>Informação é proteção</small>
-        </span>
-      </RouterLink>
+body {
+  margin: 0;
+  font-family: 'DM Sans', Arial, sans-serif;
+  background: #fcf9ff;
+}
 
-      <button
-        class="botao-menu"
-        type="button"
-        :aria-expanded="menuAberto"
-        aria-label="Abrir ou fechar menu"
-        @click="menuAberto = !menuAberto"
-      >
-        {{ menuAberto ? '✕' : '☰' }}
-      </button>
+a {
+  text-decoration: none;
+}
 
-      <nav class="navegacao" :class="{ 'navegacao-aberta': menuAberto }">
-        <RouterLink to="/" @click="fecharMenu">
-          Início
-        </RouterLink>
+.cabecalho {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 17px 7%;
+  background: #ffffffed;
+  border-bottom: 1px solid #eee5f3;
+  backdrop-filter: blur(12px);
+}
 
-        <RouterLink to="/direitos" @click="fecharMenu">
-          Direitos
-        </RouterLink>
+.marca {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: #745092;
+  font-size: 20px;
+}
 
-        <RouterLink to="/relacionamentos" @click="fecharMenu">
-          Relacionamentos
-        </RouterLink>
+.marca-simbolo {
+  display: grid;
+  place-items: center;
+  width: 38px;
+  height: 38px;
+  border-radius: 12px;
+  background: #eee3ff;
+  color: #805ca0;
+  font-weight: 800;
+}
 
-        <RouterLink to="/ajuda" class="link-ajuda" @click="fecharMenu">
-          Buscar ajuda
-        </RouterLink>
-      </nav>
-    </header>
+.navegacao {
+  display: flex;
+  align-items: center;
+  gap: 22px;
+}
 
-    <main class="conteudo-principal">
-      <RouterView />
-    </main>
+.navegacao a {
+  color: #65566f;
+  font-size: 14px;
+  font-weight: 600;
+  transition: 0.2s;
+}
 
-    <footer class="rodape">
-      <RouterLink to="/" class="rodape-marca">
-        Elas Protegidas ♡
-      </RouterLink>
+.navegacao a:hover,
+.navegacao a.router-link-active {
+  color: #986cba;
+}
 
-      <p>Informação é proteção. Conhecimento é poder.</p>
+.navegacao .link-solicitar {
+  padding: 11px 17px;
+  border-radius: 25px;
+  background: #9870b8;
+  color: white;
+}
 
-      <p class="rodape-aviso">
-        Projeto educativo. Não substitui serviços de emergência
-        ou orientação profissional.
-      </p>
+.navegacao .link-solicitar:hover,
+.navegacao .link-solicitar.router-link-active {
+  background: #80599f;
+  color: white;
+}
 
-      <div class="rodape-links">
-        <RouterLink to="/direitos">Conheça seus direitos</RouterLink>
-        <RouterLink to="/ajuda">Canais de atendimento</RouterLink>
-      </div>
+.menu-botao {
+  display: none;
+  padding: 9px 14px;
+  border: 1px solid #e4d8ed;
+  border-radius: 10px;
+  background: white;
+  color: #80599f;
+  font-weight: 700;
+}
 
-      <small>© 2026 Elas Protegidas · Informação e acolhimento</small>
-    </footer>
-  </div>
-</template>
+.rodape {
+  padding: 45px 20px;
+  background: #f1eafa;
+  color: #74627e;
+  text-align: center;
+}
+
+.rodape-marca {
+  color: #80599f;
+  font-size: 23px;
+  font-weight: 800;
+}
+
+.rodape-aviso {
+  font-size: 13px;
+}
+
+.rodape-links {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 20px;
+  margin: 20px 0;
+}
+
+.rodape-links a {
+  color: #80599f;
+  font-weight: 600;
+}
+
+.rodape small {
+  color: #8d8095;
+}
+
+@media (max-width: 900px) {
+  .cabecalho {
+    flex-wrap: wrap;
+  }
+
+  .menu-botao {
+    display: block;
+  }
+
+  .navegacao {
+    display: none;
+    width: 100%;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
+  }
+
+  .navegacao.aberto {
+    display: flex;
+  }
+
+  .navegacao a {
+    padding: 13px 8px;
+  }
+
+  .navegacao .link-solicitar {
+    text-align: center;
+    margin-top: 8px;
+  }
+}
+</style>

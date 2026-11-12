@@ -1,3 +1,4 @@
+
 <template>
   <div>
     <section class="hero">
@@ -113,8 +114,6 @@
     </section>
 
     <section class="faixa-reflexao">
-      <span class="aspas">“</span>
-
       <h2>
         Respeito não é um favor.
         <span>É um direito.</span>
@@ -127,6 +126,23 @@
       <RouterLink to="/direitos" class="botao botao-claro">
         Saiba mais sobre seus direitos
       </RouterLink>
+    </section>
+
+    <!-- HOMENAGEM À MÚSICA MARIA, MARIA -->
+    <section class="frase-musica">
+      <span class="musica-etiqueta">UMA HOMENAGEM À FORÇA FEMININA</span>
+
+      <div class="musica-icone">♫</div>
+
+      <h2>Maria, Maria</h2>
+
+      <p class="musica-frase">
+        Toda Maria carrega uma força que merece ser reconhecida.
+      </p>
+
+      <span class="musica-credito">
+        Inspirado na canção de Milton Nascimento
+      </span>
     </section>
 
     <section class="secao secao-sobre">
@@ -172,3 +188,63 @@
 <script setup>
 import { RouterLink } from 'vue-router'
 </script>
+
+<style scoped>
+.frase-musica {
+  text-align: center;
+  padding: 65px 25px;
+  margin: 45px 0;
+  background: linear-gradient(135deg, #f3eafa, #fceef4);
+  border-radius: 24px;
+  border: 1px solid #ead9f2;
+}
+
+.musica-etiqueta {
+  color: #966bb0;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 2px;
+}
+
+.musica-icone {
+  color: #a477bd;
+  font-size: 35px;
+  margin: 18px 0 8px;
+}
+
+.frase-musica h2 {
+  color: #70458f;
+  font-family: 'Playfair Display', serif;
+  font-size: 32px;
+  margin-bottom: 15px;
+}
+
+.musica-frase {
+  color: #634b70;
+  font-family: 'Playfair Display', serif;
+  font-size: 23px;
+  font-weight: 600;
+  max-width: 650px;
+  margin: 0 auto 18px;
+  line-height: 1.5;
+}
+
+.musica-credito {
+  color: #927c9c;
+  font-size: 13px;
+}
+
+@media (max-width: 600px) {
+  .frase-musica {
+    padding: 45px 18px;
+  }
+
+  .frase-musica h2 {
+    font-size: 27px;
+  }
+
+  .musica-frase {
+    font-size: 19px;
+  }
+}
+</style>
